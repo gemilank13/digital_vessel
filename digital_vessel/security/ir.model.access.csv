@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vessel_vessel,vessel_vessel,model_vessel_vessel,,1,1,1,1
+access_scope_scope,scope_scope,model_scope_scope,,1,1,1,1
+access_working_area,working_area,model_working_area,,1,1,1,1
+access_technician_technician,technician_technician,model_technician_technician,,1,1,1,1
+access_customer_customer,customer_customer,model_customer_customer,,1,1,1,1
+access_component_component,component_component,model_component_component,,1,1,1,1
+access_location_location,location_location,model_location_location,,1,1,1,1
+access_captain_captain,captain_captain,model_captain_captain,,1,1,1,1
+access_preventive_maintenance,preventive_maintenance,model_preventive_maintenance,,1,1,1,1
+access_component_line,component_line,model_component_line,,1,1,1,1
+access_technician_line,technician_line,model_technician_line,,1,1,1,1
+access_scope_line,scope_line,model_scope_line,,1,1,1,1
+access_job_code,job_code,model_job_code,,1,1,1,1
+access_repair_order,repair_order,model_repair_order,,1,1,1,1
