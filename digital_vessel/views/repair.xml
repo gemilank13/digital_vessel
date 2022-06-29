@@ -23,10 +23,11 @@
             <field name="arch" type="xml">
                 <form string="Repair Order">
                     <header>
-                        <button name="button_approved" string="Approved" type="object" class="oe_highlight" />
-                        <button name="button_reject" string="Reject" type="object" class="oe_highlight" />
-                        <field name="stage" widget="statusbar" statusbar_visible="Waiting,Approved,Reject"
-                            options="{'clickable': '0'}"/>
+                        <header>
+                          <button name="button_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('stage', '==', 'Reject')]}"/>
+                          <button name="button_reject" string="Reject" type="object" class="oe_highlight" />
+                          <field name="stage" widget="statusbar" statusbar_visible="Waiting,Approved,Reject"/>
+                        </header>
                     </header>
                     <sheet>
                     	<div class="oe_title">
