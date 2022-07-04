@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+      <report
+         id="action_report_pm"
+         string="Print PM Report"
+         model="preventive.maintenance"
+         report_type="qweb-pdf"
+         file="digital_vessel.pm_report"
+         name="digital_vessel.pm_report"
+      />
+   </data>
+</odoo>
+
