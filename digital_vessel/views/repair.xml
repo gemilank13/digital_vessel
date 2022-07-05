@@ -1,0 +1,129 @@
+<odoo>
+  <data>
+        <!-- Prepentive Maintenance -->
+
+        <record id="repair_order_tree" model="ir.ui.view">
+            <field name="name">repair_order.tree</field>
+            <field name="model">repair.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Repair Order Number"/>
+                    <field name="vessel_id"/>
+                    <field name="customer_id"/>
+                    <field name="approved_by"/>
+                    <field name="status"/>
+                    <field name="stage" string="Sign"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="repair_order_form" model="ir.ui.view">
+            <field name="name">repair_order.form</field>
+            <field name="model">repair.order</field>
+            <field name="arch" type="xml">
+                <form string="Repair Order">
+                    <header>
+                        <button name="button_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('stage', '==', 'Reject')]}" />
+                        <button name="button_reject" string="Reject" type="object" class="oe_highlight" />
+                        <field name="stage" widget="statusbar" statusbar_visible="Waiting,Approved,Reject"/>
+                    </header>
+                    <sheet>
+                    	<div class="oe_title">
+                            <span class="o_form_label" >Repair Order Number</span>
+                            <h1>
+                                <field name="name" string="Repair Order Number"/>
+                            </h1>
+                        </div>
+                        <group>
+                        	<group>
+                            	<field name="start_date"/>
+                            	<field name="finish_date"/>
+                            	<field name="vessel_id"/>
+                            	<field name="customer_id"/>
+                            	<field name="location_id"/>
+                                <field name="approved_by"/>
+                                <field name="prepared_by"/>
+                            </group>
+
+                            <group>
+                            	<field name="job_code_id"/>
+                            	<field name="r_h_hours"/>
+                            	<field name="status"/>
+                            </group>
+                        </group>
+                        
+                        <notebook colspan="4">
+                            <page name="part_component" string="Part/Component">
+                            	<group>
+                                    <field name="component_line_ids">
+                                        <tree editable="bottom" string="Part/Component" create="1">
+                                            <field name="component_id"/>
+                                            <field name="qty"/>
+                                            <field name="unit_id"/>
+                                            <field name="photos"/>
+                                            <field name="keterangan"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+                            <page name="technician" string="Technician">
+                                <group>
+                                    <field name="technician_line_ids">
+                                        <tree editable="bottom" string="Technician" create="1">
+                                            <field name="technician_id"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+                            <page name="scope" string="Scope">
+                                <group>
+                                    <field name="scope_line_ids">
+                                        <tree editable="bottom" string="Scope" create="1">
+                                            <field name="scope_id"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+
+                            </page>
+                        </notebook>
+
+                        <group>
+                            <field name="remarks"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_repair_order" model="ir.actions.act_window">
+            <field name="name">Repair Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">repair.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_repair" name="Repair" parent="menu_digital_vessel" sequence="3"/>
+            <menuitem 
+                id="submenu_repair_order" 
+                name="Repair Order" 
+                parent="menu_repair" 
+                action="action_repair_order" 
+                sequence="3"/>
+            <!-- <menuitem 
+                id="submenu_laporan_kerusakan"
+                name="Laporan Kerusakan" 
+                parent="menu_repair" 
+                action="action_repair_order" 
+                sequence="4"/>
+
+            <menuitem 
+                id="submenu_laporan_perbaikan" 
+                name="Laporan Perbaikan" 
+                parent="menu_repair" 
+                action="action_repair_order" 
+                sequence="5"/> -->
+
+    </data>
+</odoo>

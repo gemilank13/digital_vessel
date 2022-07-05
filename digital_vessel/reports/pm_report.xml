@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="pm_report">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+				  	<div class="header">
+				  		<div class="row">
+							<div class="col-12">
+								    <img src='/web/binary/company_logo' style="width:200px;float:right;"/>
+							</div>
+						</div>
+				  		
+				  		<div class="row">
+							<div class="col-12">
+								<center>
+									<p style="font-weight:bold">PM REPORT<br/>PM Report Number : <span t-field="o.name"/></p>
+								</center>
+							</div>
+						</div>
+				  	</div>
+					<div class="page">
+						<div class="row">
+							<div class="col-6">
+								<table width="100%" style="font-size:10px;">
+									<tr>
+										<td>Date Start</td>
+										<td>: <span t-field="o.start_date"/></td>
+									</tr>
+									<tr>
+										<td>Date Finish</td>
+										<td>: <span t-field="o.finish_date"/></td>
+									</tr>
+									<tr>
+										<td>Vessel</td>
+										<td>: <span t-field="o.vessel_id.name"/></td>
+									</tr>
+									<tr>
+										<td>Customer</td>
+										<td>: <span t-field="o.customer_id.name"/></td>
+									</tr>
+									<tr>
+										<td>Location
+										</td>
+										<td>: <span t-field="o.location_id.name"/></td>
+									</tr>
+								</table>
+							</div>
+
+							<div class="col-6">
+								<table width="100%" style="font-size:10px;">
+									<tr>
+										<td>PM Period</td>
+										<td>: <span t-field="o.pm_period"/></td>
+									</tr>
+									<tr>
+										<td>JOB</td>
+										<td>: PM</td>
+									</tr>
+									<tr>
+										<td>R/H (hours)</td>
+										<td>: <span t-field="o.r_h_hours"/></td>
+									</tr>
+									<tr>
+										<td>Status</td>
+										<td>: <span t-field="o.status"/></td>
+									</tr>
+									<tr>
+										<td>Sign</td>
+										<td>: <span t-field="o.stage"/></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top:30px;">
+							<div class="col-12">
+								<table width="100%" style="font-size:10px;">
+									<tr style="text-align:center;">
+										<td style="border:1px solid black;font-weight:bold;width:20%;">TECHNICIAN</td>
+										<td style="border:1px solid black;font-weight:bold;width:15%;">SCOPE</td>
+										<td style="border:1px solid black;font-weight:bold;width:25%;">PART COMPONENT</td>
+										<td style="border:1px solid black;font-weight:bold;width:10%;">QTY</td>
+										<td style="border:1px solid black;font-weight:bold;width:10%;">UNIT</td>
+										<td style="border:1px solid black;font-weight:bold;width:20%;">PHOTO</td>
+									</tr>
+
+									<tr style="text-align:center;" >
+										<td style="border:1px solid black;width:20%;min-height:200px;" >
+											<t t-foreach="o.technician_line_ids" t-as="tech">
+												<span t-field="tech.technician_id.name"/><br/>
+											</t>
+										</td>
+										<td style="border:1px solid black;width:15%;">
+											<t t-foreach="o.scope_line_ids" t-as="sc">
+												<span t-field="sc.scope_id.name"/><br/>
+											</t>
+										</td>
+
+										
+											<td style="border:1px solid black;width:15%;">
+												<t t-foreach="o.component_line_ids" t-as="com">
+													<span t-field="com.component_id.name"/><br/>
+												</t>
+											</td>
+											<td style="border:1px solid black;width:15%;">
+												<t t-foreach="o.component_line_ids" t-as="com">
+													<span t-field="com.qty"/><br/>
+												</t>
+											</td>
+											<td style="border:1px solid black;width:15%;">
+												<t t-foreach="o.component_line_ids" t-as="com">
+													<span t-field="com.unit_id.name"/><br/>
+												</t>
+											</td>
+											<td style="border:1px solid black;width:15%;">
+												<t t-foreach="o.component_line_ids" t-as="com">
+													<span t-field="com.photos"/><br/>
+												</t>
+											</td>
+										
+									</tr>
+
+
+								</table>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top:20px">
+							<div class="col-12" style="font-size:10px;">
+								<table width="100%" style="font-size:10px;">
+									<tr>
+										<td style="border:1px solid black;font-weight:bold;width:20%;height:100px; padding:20px">
+											Remarks :<br/>
+											<span t-field="o.remarks"/><br/>
+										</td>
+									</tr>
+								</table>
+								
+							</div>
+						</div>
+
+						
+					</div>
+
+					<!-- <div class="footer"> -->
+						<div class="row" style="margin-top:50px;">
+							<div class="col-6 text-center" style="font-size:10px;">
+								Approved By,
+								<br/><br/><br/><br/>
+								<u><span t-field="o.approved_by.name"/><br/></u>
+							</div>
+							<div class="col-6 text-center" style="font-size:10px;">
+								Prepared By,
+								<br/><br/><br/><br/>
+								<u><span t-field="o.prepared_by.name"/><br/></u>
+							</div>
+						</div>
+					<!-- </div> -->
+				</t>
+			</t>
+		</t>
+	</template>
+</odoo>
