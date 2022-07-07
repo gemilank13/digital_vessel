@@ -8,7 +8,17 @@
          report_type="qweb-pdf"
          file="digital_vessel.pm_report"
          name="digital_vessel.pm_report"
+         print_report_name = "(object.name)"
+      />
+
+      <report
+         id="action_report_repair"
+         string="Print Repair Report"
+         model="repair.order"
+         report_type="qweb-pdf"
+         file="digital_vessel.repair_report"
+         name="digital_vessel.repair_report"
+         print_report_name = "(object.name)"
       />
    </data>
 </odoo>
-

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<template id="pm_report">
+	<template id="repair_report">
 		<t t-call="web.html_container">
 			<t t-foreach="docs" t-as="o">
 				<t t-call="web.basic_layout">
@@ -14,7 +14,7 @@
 				  		<div class="row">
 							<div class="col-12">
 								<center>
-									<p style="font-weight:bold">PM REPORT<br/>PM Report Number : <span t-field="o.name"/></p>
+									<p style="font-weight:bold">REPAIR REPORT<br/>Repair Report Number : <span t-field="o.name"/></p>
 								</center>
 							</div>
 						</div>
@@ -50,12 +50,12 @@
 							<div class="col-6">
 								<table width="100%" style="font-size:10px;">
 									<tr>
-										<td>PM Period</td>
-										<td>: <span t-field="o.pm_period"/></td>
+										<td>Job</td>
+										<td>: Repair</td>
 									</tr>
 									<tr>
-										<td>JOB</td>
-										<td>: PM</td>
+										<td>Job Code KHS</td>
+										<td>: <span t-field="o.job_code_id.name"/></td>
 									</tr>
 									<tr>
 										<td>R/H (hours)</td>
@@ -96,6 +96,7 @@
 									</tr>
 								</table>
 							</div>
+
 
 							<div class="col-8">
 								<table width="100%" style="font-size:10px;">
@@ -143,6 +144,7 @@
 								
 							</div>
 						</div>
+
 
 						
 					</div>

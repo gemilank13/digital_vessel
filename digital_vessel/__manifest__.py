@@ -18,6 +18,7 @@
          'views/sequence.xml',
          'reports/pm_report.xml',
          'reports/report_pdf.xml',
+         'reports/repair_report.xml',
          # 'views/stage.xml',
 
 

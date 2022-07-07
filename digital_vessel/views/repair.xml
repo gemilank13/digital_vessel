@@ -60,7 +60,7 @@
                                             <field name="component_id"/>
                                             <field name="qty"/>
                                             <field name="unit_id"/>
-                                            <field name="photos"/>
+                                            <field name="photos" widget="image" style="max-width:100px"/>
                                             <field name="keterangan"/>
                                         </tree>
                                     </field>
