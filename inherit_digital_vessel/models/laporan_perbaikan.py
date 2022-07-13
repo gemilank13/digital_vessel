@@ -4,16 +4,16 @@ class Tahapperbaikan(models.Model):
 
     _name = 'tahap.perbaikan.line'
 
-    name = fields.Text(string="Deskripsi")
-    photos = fields.Binary(string="Foto")
+    name = fields.Text(string="Deskripsi", required=True)
+    photos = fields.Binary(string="Foto", required=True)
     perbaikan_id = fields.Many2one('laporan.perbaikan', string='laporan perbaikan Id')
 
 class Tahappemeriksaanfisik(models.Model):
 
     _name = 'tahap.pemeriksaan.fisik.line'
 
-    name = fields.Text(string="Deskripsi")
-    photos = fields.Binary(string="Foto")
+    name = fields.Text(string="Deskripsi", required=True)
+    photos = fields.Binary(string="Foto", required=True)
     perbaikan_id = fields.Many2one('laporan.perbaikan', string='laporan perbaikan Id')
 
 
@@ -21,8 +21,8 @@ class Sparepart(models.Model):
 
     _name = 'sparepart.line'
 
-    name = fields.Text(string="Deskripsi")
-    photos = fields.Binary(string="Foto")
+    name = fields.Text(string="Deskripsi", required=True)
+    photos = fields.Binary(string="Foto", required=True)
     perbaikan_id = fields.Many2one('laporan.perbaikan', string='laporan perbaikan Id')
 
 
@@ -30,12 +30,12 @@ class Laporanperbaikan(models.Model):
     _name = 'laporan.perbaikan'
     
     name = fields.Char(string="Nomor Laporan", readonly=True, required=True, copy=False, default='New')
-    vessel_id = fields.Many2one('vessel.vessel', string="Nama Kapal", required=True)
+    vessel_id = fields.Many2one('vessel.vessel', string="Nama Kapal", required=True, compute='_compute_kerusakan')
     location_id = fields.Many2one('location.location', string="Lokasi")
     datetime = fields.Datetime(string="Tanggal/Jam")
     kerusakan_id = fields.Many2one('laporan.kerusakan', string="No. Laporan Kerusakan")
-    perbaikan = fields.Char(string="Perbaikan Pada", readonly=True)
-    tgl_kerusakan = fields.Datetime(string="Tanggal Kerusakan", readonly=True)
+    perbaikan = fields.Char(string="Perbaikan Pada", readonly=True, compute='_compute_kerusakan')
+    tgl_kerusakan = fields.Datetime(string="Tanggal Kerusakan", readonly=True, compute='_compute_kerusakan')
     crew_id = fields.Many2one('hr.employee', string="Crew")
     approved_by = fields.Many2one('hr.employee', string="Mengetahui")
     prepared_by = fields.Many2one('hr.employee', string="Pelaksana")
@@ -59,10 +59,12 @@ class Laporanperbaikan(models.Model):
         for rec in self:
             rec.write({'stage': 'Reject'})
     
-    @api.onchange('kerusakan_id') #ok
-    def _onchange_kerusakan(self):
+    @api.depends('kerusakan_id') #ok
+    def _compute_kerusakan(self):
         for laporan in self:
             if laporan.kerusakan_id:
+                laporan.vessel_id =laporan.kerusakan_id.vessel_id.id
+                # laporan.location_id = laporan.kerusakan_id.location_id.id
                 laporan.perbaikan= laporan.kerusakan_id.kerusakan
                 laporan.tgl_kerusakan = laporan.kerusakan_id.datetime
 

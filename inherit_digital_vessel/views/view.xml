@@ -128,12 +128,12 @@
                         </div>
                         <group>
                         	<group>
-                            	<field name="vessel_id"/>
-                            	<field name="location_id"/>
-                            	<field name="datetime"/>
-                            	<field name="kerusakan_id"/>
-                            	<field name="perbaikan"/>
-                                <field name="tgl_kerusakan"/>
+                                <field name="kerusakan_id"/>
+                                <field name="vessel_id"/>
+                                <field name="perbaikan"/>                            	  
+                                <field name="tgl_kerusakan"/>                     
+                                <field name="location_id"/>
+                                <field name="datetime"/>
                             </group>
 
                             <group>

@@ -5,7 +5,7 @@ class Kerusakanline(models.Model):
     _name = 'kondisi.kerusakan.line'
 
     name = fields.Text(string="Deskripsi")
-    photos = fields.Binary(string="Foto")
+    photos = fields.Binary(string="Foto", required=True)
     kerusakan_id = fields.Many2one('laporan.kerusakan', string='laporan kerusakan Id')
 
 class Permintaanrepair(models.Model):
@@ -13,7 +13,7 @@ class Permintaanrepair(models.Model):
     _name = 'permintaan.repair.line'
 
     name = fields.Text(string="Deskripsi")
-    photos = fields.Binary(string="Foto")
+    photos = fields.Binary(string="Foto", required=True)
     kerusakan_id = fields.Many2one('laporan.kerusakan', string='laporan kerusakan Id')
 
 class Laporankerusakan(models.Model):
