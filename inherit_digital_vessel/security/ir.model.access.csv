@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_laporan_kerusakan,laporan_kerusakan,model_laporan_kerusakan,,1,1,1,1
+access_kondisi_kerusakan_line,kondisi_kerusakan_line,model_kondisi_kerusakan_line,,1,1,1,1
+access_permintaan_repair_line,permintaan_repair_line,model_permintaan_repair_line,,1,1,1,1
+access_laporan_perbaikan,laporan_perbaikan,model_laporan_perbaikan,,1,1,1,1
+access_tahap_perbaikan_line,tahap_perbaikan_line,model_tahap_perbaikan_line,,1,1,1,1
+access_tahap_pemeriksaan_fisik_line,tahap_pemeriksaan_fisik_line,model_tahap_pemeriksaan_fisik_line,,1,1,1,1
+access_sparepart_line,sparepart_line,model_sparepart_line,,1,1,1,1
