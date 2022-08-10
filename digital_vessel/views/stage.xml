@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stage_stage_tree" model="ir.ui.view">
+            <field name="name">stage.stage.tree</field>
+            <field name="model">stage.stage</field>
+            <field name="arch" type="xml">
+                <tree string="Stage">
+                    <field name="sequence" widget="handle" groups="base.group_no_one"/>
+                    <field name="name"/>
+                    <field name="fold"/>
+                    <field name="task_progress"/>
+                    <field name="is_waiting"/>
+                    <field name="is_approved"/>
+                    <field name="is_not_approved"/>
+                    <field name="description"/>
+                   <!--  <field name="next_stage_ids" widget="many2many_tags"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="stage_stage_form" model="ir.ui.view">
+            <field name="name">stage.stage.form</field>
+            <field name="model">stage.stage</field>
+            <field name="arch" type="xml">
+                <form string="Stage">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <!-- <field name="mail_template_id"/>
+                                <field name="rating_template_id"/>
+                                <field name="next_stage_ids" widget="many2many_tags"/> -->
+                            </group>
+                            <group>
+                                <field name="fold"/>
+                                <field name="task_progress"/>
+                                <field name="is_waiting"/>
+                                <field name="is_approved"/>
+                                <field name="is_not_approved"/>
+                                <field name="sequence" groups="base.group_no_one"/>
+                                <field name="sla"/>
+                            </group>
+                        </group>
+                        <group string="Stage Description and Tooltips">
+                            <p class="text-muted" colspan="2">
+                                At each stage employees can block or make task/issue ready for next stage.
+                                You can define here labels that will be displayed for the state instead
+                                of the default labels.
+                            </p>
+                            <label for="legend_normal" string=" " class="o_status oe_project_kanban_legend"
+                                title="Task in progress. Click to block or set as done."
+                                aria-label="Task in progress. Click to block or set as done." role="img"/>
+                            <field name="legend_normal" nolabel="1"/>
+                            <label for="legend_blocked" string=" " class="o_status o_status_red oe_project_kanban_legend"
+                                title="Task is blocked. Click to unblock or set as done."
+                                aria-label="Task is blocked. Click to unblock or set as done." role="img"/>
+                            <field name="legend_blocked" nolabel="1"/>
+                            <label for="legend_done" string=" " class="o_status o_status_green oe_project_kanban_legend"
+                                title="This step is done. Click to block or set in progress."
+                                aria-label="This step is done. Click to block or set in progress." role="img"/>
+                            <field name="legend_done" nolabel="1"/>
+
+                            <p class="text-muted" colspan="2">
+                                You can also give a tooltip about the use of the stars available in the kanban and form views.
+                            </p>
+                            <label for="legend_priority" string=" " class="fa fa-star fa-lg o_star_on oe_project_kanban_legend" aria-label="Legend priority" title="Legend priority" role="img"/>
+                            <field name="legend_priority" nolabel="1"/>
+
+                            <p class="text-muted" colspan="2">
+                                You can also add a description to help your coworkers understand the meaning and purpose of the stage.
+                            </p>
+                            <field name="description" placeholder="Add a description..." nolabel="1" colspan="2"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stage_stage" model="ir.actions.act_window">
+          <field name="name">Stage</field>
+          <field name="res_model">stage.stage</field>
+          <field name="view_mode">tree,form</field>
+          <field name="target">current</field>
+        </record>
+
+        		<menuitem 
+                    id="menu_stage"
+                    name="Stage" 
+                    parent="menu_config" 
+                    action="action_stage_stage" 
+                    sequence="18"/>
+    </data>
+</odoo>
