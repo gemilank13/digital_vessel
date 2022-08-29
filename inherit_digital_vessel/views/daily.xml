@@ -1,0 +1,99 @@
+<odoo>
+  <data>
+
+        <record id="daily_tree" model="ir.ui.view">
+            <field name="name">daily_tree</field>
+            <field name="model">daily.ops</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="vessel_id"/>
+                    <field name="report_date"/>
+                    <field name="status"/>
+                    <field name="captain_id"/>
+                    <field name="approved_by"/>
+                    <field name="prepared_by"/>
+                    <field name="stage" string="Sign"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="daily_form" model="ir.ui.view">
+            <field name="name">daily_form</field>
+            <field name="model">daily.ops</field>
+            <field name="arch" type="xml">
+                <form string="Daily Ops">
+                    <header>
+                        <button name="button_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('stage', '==', 'Reject')]}" />
+                        <button name="button_reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('stage', '==', 'Approved')]}"/>
+                        <field name="stage" widget="statusbar" statusbar_visible="Waiting,Approved,Reject"/>
+                    </header>
+                    <sheet>
+                    	<div class="oe_title">
+                            <span class="o_form_label" >Daily Ops Number</span>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                        	<group>
+                            	<field name="report_date"/>
+                                <field name="vessel_id"/>
+                            	<field name="captain_id"/>
+                            	<field name="prepared_by"/>
+                            	<field name="approved_by"/>
+
+                            </group>
+
+                            <group>
+                                <field name="working_area_id"/>
+                                <field name="location_id"/>
+                                <field name="cuaca"/>
+                            	<field name="status"/>
+                                
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Operation Running Time (Hrs)">
+                                <field name="op_start" widget="float_time"/>
+                                <field name="op_finish" widget="float_time"/>
+                                <field name="stop_op" widget="float_time"/>
+                                <field name="total_op" widget="float_time"/>
+                            </group>
+
+                            <group>
+                                
+                            </group>
+                        </group>
+                        
+<!--                         <notebook colspan="4">
+                            <page name="kamar_mesin" string="Description">
+                            	<group>
+                                    <field name="kamar_mesin_line_ids">
+                                        <tree editable="bottom" string="Description" create="1">
+                                            <field name="section_id"/>
+                                            <field name="kamarmesin_id"/>
+                                            <field name="status"/>
+                                            <field name="remark"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+                        </notebook> -->
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_daily_ops" model="ir.actions.act_window">
+            <field name="name">Daily Ops</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">daily.ops</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_daily_ops" name="Daily Ops" parent="digital_vessel.menu_digital_vessel" sequence="1" action="action_daily_ops"/>
+    </data>
+</odoo>
