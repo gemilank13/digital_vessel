@@ -14,11 +14,7 @@ class RepairOrder(models.Model):
     prepared_by = fields.Many2one('hr.employee', string="Prepared By")
     r_h_hours = fields.Char(string="R/H (Hours)")
     status = fields.Selection([
-        ('Operation', 'Operation'),
-    	('Stand By', 'Stand By'),
     	('Breakdown', 'Breakdown'),
-    	('Docking', 'Docking'),
-        ('Preventive Maintenance', 'Preventive Maintenance'),
         ('Corrective Maintenance', 'Corrective Maintenance')
         ], string='Status', required=True)
     component_line_ids = fields.One2many('component.line', 'repair_id',  string="Component Line")
@@ -55,6 +51,25 @@ class RepairOrder(models.Model):
     def button_approved(self):
         for rec in self:
             rec.write({'stage': 'Approved'})
+
+            dashboard_obj = self.env['dashboard.vessel'].search([
+                ('vessel_id', '=', rec.vessel_id.id)
+            ])
+
+            if dashboard_obj:
+                
+                dashboard_obj.write({'status': rec.status,
+                    'date': rec.create_date
+                })
+
+            else:
+
+                vals_dashboard ={
+                    'vessel_id': rec.vessel_id.id,
+                    'status': rec.status,
+                    'date': rec.create_date
+                }
+                dashboard_obj.create(vals_dashboard)
 
     @api.multi
     def button_reject(self):

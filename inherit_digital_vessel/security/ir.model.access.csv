@@ -16,3 +16,4 @@ access_wheel_house_line,wheel_house_line,model_wheel_house_line,,1,1,1,1
 access_daily_ops,daily_ops,model_daily_ops,,1,1,1,1
 access_section_weekly_line,section_weekly_line,model_section_weekly_line,,1,1,1,1
 access_vessel_activity_line,vessel_activity_line,model_vessel_activity_line,,1,1,1,1
+access_dashboard_vessel,dashboard_vessel,model_dashboard_vessel,,1,1,1,1

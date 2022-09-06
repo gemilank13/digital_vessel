@@ -8,7 +8,7 @@
     'website': "http://www.jppi.co.id",
     'category': 'Uncategorized',
     'version': '0.1',
-    'depends': ['base','uom','hr', 'digital_vessel'],
+    'depends': ['base','uom','hr', 'digital_vessel', 'board'],
 
     'data': [
          'security/security.xml',
@@ -20,7 +20,7 @@
          'views/sequence.xml',
         #  'reports/pm_report.xml',
         #  'reports/report_pdf.xml',
-         # 'views/stage.xml',
+         'views/dashboard.xml',
 
 
     ],
