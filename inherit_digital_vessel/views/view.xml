@@ -1,0 +1,214 @@
+<odoo>
+  <data>
+        <!-- Laporan Kerusakan -->
+        <record id="laporan_kerusakan_tree" model="ir.ui.view">
+            <field name="name">laporan_kerusakan_tree</field>
+            <field name="model">laporan.kerusakan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Nomor Laporan"/>
+                    <field name="vessel_id"/>
+                    <field name="datetime"/>
+                    <field name="location_id"/>
+                    <field name="status"/>
+                    <field name="permintaan_repair"/>
+                    <field name="crew_id"/>
+                    <field name="stage" string="Sign"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="laporan_kerusakan_form" model="ir.ui.view">
+            <field name="name">laporan_kerusakan_form</field>
+            <field name="model">laporan.kerusakan</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Kerusakan">
+                    <header>
+                        <button name="button_approved" string="Approved" groups="inherit_digital_vessel.svp_dv,inherit_digital_vessel.admin_dv" type="object" class="oe_highlight" attrs="{'invisible': [('stage', 'in', ('Reject', 'Approved'))]}" />
+                        <button name="button_reject" string="Reject" groups="inherit_digital_vessel.svp_dv,inherit_digital_vessel.admin_dv" type="object" class="oe_highlight" attrs="{'invisible': [('stage', 'in', ('Reject', 'Approved'))]}"/>
+                        <field name="stage" widget="statusbar" statusbar_visible="Waiting,Approved,Reject"/>
+                    </header>
+                    <sheet>
+                    	<div class="oe_title">
+                            <span class="o_form_label" >Nomor Laporan</span>
+                            <h1>
+                                <field name="name" string="Repair Order Number"/>
+                            </h1>
+                        </div>
+                        <group>
+                        	<group>
+                            	<field name="vessel_id"/>
+                            	<field name="location_id"/>
+                            	<field name="datetime"/>
+                            	<field name="kerusakan"/>
+                            	<field name="crew_id"/>
+                                <field name="approved_by"/>
+                                <field name="prepared_by"/>
+                                <field name="x_css" invisible="1"/>
+                            </group>
+
+                            <group>
+                            	<field name="status"/>
+                            	<field name="r_h_hours"/>
+                            	<field name="repair" string="Jenis Repair"/>
+                                <field name="permintaan_repair"/>
+                            </group>
+                        </group>
+                        
+                        <notebook colspan="4">
+                            <page name="kondisi_kerusakan" string="Kondisi Kerusakan">
+                            	<group>
+                                    <field name="kerusakan_line_ids">
+                                        <tree editable="bottom" string="Kondisi Kerusakan" create="1">
+                                            <field name="name"/>
+                                            <field name="photos"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+                            <page name="permintaan_repair" string="Permintaan Repair">
+                            	<group>
+                                    <field name="permintaan_line_ids">
+                                        <tree editable="bottom" string="Permintaan Repair" create="1">
+                                            <field name="name"/>
+                                            <field name="photos"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_laporan_kerusakan_order" model="ir.actions.act_window">
+            <field name="name">Laporan Kerusakan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">laporan.kerusakan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Laporan Perbaikan -->
+        <record id="laporan_perbaikan_tree" model="ir.ui.view">
+            <field name="name">laporan_perbaikan_tree</field>
+            <field name="model">laporan.perbaikan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Nomor Laporan"/>
+                    <field name="vessel_id"/>
+                    <field name="datetime"/>
+                    <field name="location_id"/>
+                    <field name="kerusakan_id"/>
+                    <field name="perbaikan"/>
+                    <field name="tgl_kerusakan"/>
+                    <field name="stage" string="Sign"/>
+                    
+                </tree>
+            </field>
+        </record>
+
+        <record id="laporan_perbaikan_form" model="ir.ui.view">
+            <field name="name">laporan_perbaikan_form</field>
+            <field name="model">laporan.perbaikan</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Perbaikan">
+                    <header>
+                        <button name="button_approved" string="Approved" type="object" class="oe_highlight" attrs="{'invisible': [('stage', 'in', ('Reject', 'Approved'))]}" />
+                        <button name="button_reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('stage', 'in', ('Reject', 'Approved'))]}"/>
+                        <field name="stage" widget="statusbar" statusbar_visible="Waiting,Approved,Reject"/>
+                    </header>
+                    <sheet>
+                    	<div class="oe_title">
+                            <span class="o_form_label" >Nomor Laporan</span>
+                            <h1>
+                                <field name="name" string="Repair Order Number"/>
+                            </h1>
+                        </div>
+                        <group>
+                        	<group>
+                                <field name="kerusakan_id"/>
+                                <field name="vessel_id"/>
+                                <field name="perbaikan"/>                            	  
+                                <field name="tgl_kerusakan"/>                     
+                                <field name="location_id"/>
+                                <field name="datetime"/>
+                                <field name="x_css" invisible="1"/>
+                            </group>
+
+                            <group>
+                            	<field name="crew_id"/>
+                            	<field name="approved_by"/>
+                            	<field name="prepared_by"/>
+                            </group>
+                        </group>
+                        
+                        <notebook colspan="4">
+                            <page name="tahap_perbaikan" string="Tahap Perbaikan">
+                            	<group>
+                                    <field name="tahap_perbaikan_line_ids">
+                                        <tree editable="bottom" string="Tahap Perbaikan" create="1">
+                                            <field name="name"/>
+                                            <field name="photos"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+                            <page name="sparepart_diganti" string="Sparepart yang Diganti">
+                            	<group>
+                                    <field name="sparepart_line_ids">
+                                        <tree editable="bottom" string="Sparepart yang Diganti" create="1">
+                                            <field name="name"/>
+                                            <field name="photos"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+
+                            <page name="tahap_pemeriksaan" string="Tahap Pemeriksaan">
+                            	<group>
+                                    <field name="tahap_pemeriksaan_line_ids">
+                                        <tree editable="bottom" string="Tahap Pemeriksaan" create="1">
+                                            <field name="name"/>
+                                            <field name="photos"/>
+                                        </tree>
+                                    </field>
+                                </group>  
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_laporan_perbaikan" model="ir.actions.act_window">
+            <field name="name">Laporan Perbaikan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">laporan.perbaikan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem 
+            id="submenu_laporan_kerusakan"
+            name="Laporan Kerusakan" 
+            parent="digital_vessel.menu_repair" 
+            action="action_laporan_kerusakan_order"
+            sequence="4"/>
+
+        <menuitem 
+            id="submenu_laporan_perbaikan" 
+            name="Laporan Perbaikan" 
+            parent="digital_vessel.menu_repair" 
+            action= "action_laporan_perbaikan"
+            sequence="5"/>
+
+    </data>
+</odoo>
