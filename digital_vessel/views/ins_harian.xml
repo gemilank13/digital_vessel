@@ -1,0 +1,52 @@
+<odoo>
+  <data>
+        <!-- Ins Harian -->
+
+        <record id="ins_harian_tree" model="ir.ui.view">
+            <field name="name">ins_harian.tree</field>
+            <field name="model">ins.harian</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="tgl"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ins_harian_form" model="ir.ui.view">
+            <field name="name">ins_harian.form</field>
+            <field name="model">ins.harian</field>
+            <field name="arch" type="xml">
+                <form string="Daily Inspection">
+                    <sheet>
+                        <group>
+                        	<field name="name"/>
+                        	<field name="tgl"/>
+                        	<field name="status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ins_harian" model="ir.actions.act_window">
+            <field name="name">Daily Inspection</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ins.harian</field>
+            <field name="domain">[('tgl','&gt;', (context_today() -
+                datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]
+            </field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem 
+            id="menu_ins_harian" 
+        	name="Daily Inspection" 
+        	parent="menu_digital_vessel" 
+        	action="action_ins_harian"
+        	sequence="2"/>
+            
+
+    </data>
+</odoo>
