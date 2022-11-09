@@ -1,61 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
-<!--         <record id="list_status_kapal_pivot" model="ir.ui.view">
-            <field name="name">dashboard.vessel.pivot</field>
-            <field name="model">dashboard.vessel</field>
-            <field name="arch" type="xml">
-                <pivot string="Status Kapal">
-                    <field name="date" interval="month" type="row"/>
-                    <field name="status" type="col"/>
-                </pivot>
-            </field>
-        </record>
-
-        <record id="act_list_status_kapal_pivot" model="ir.actions.act_window">
-            <field name="name">Status Kapal</field>
-            <field name="res_model">dashboard.vessel</field>
-            <field name="view_mode">pivot</field>
-            <field name="view_id" ref="list_status_kapal_pivot"/>
-        </record> -->
-
-        <!-- <record id="list_status_kapal_pie" model="ir.ui.view">
-            <field name="name">dashboard.vessel.pie</field>
-            <field name="model">dashboard.vessel</field>
-            <field name="arch" type="xml">
-                <graph type="pie" string="Status Kapal">
-                    <field name="status"/>
-                </graph>
-            </field>
-        </record>
-
-        <record id="act_list_status_kapal_pie" model="ir.actions.act_window">
-            <field name="name">Status Kapal</field>
-            <field name="res_model">dashboard.vessel</field>
-            <field name="view_mode">graph</field>
-            <field name="view_id" ref="list_status_kapal_pie"/>
-        </record> -->
-<!-- 
-        <record id="list_status_kapal_tree" model="ir.ui.view">
-            <field name="name">dashboard.vessel.tree</field>
-            <field name="model">dashboard.vessel</field>
-            <field name="arch" type="xml">
-                <tree string="Status Kapal">
-                    <field name="vessel_id"/>
-                    <field name="status"/>
-                    <field name="date" widget="date"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="act_list_status_kapal_tree" model="ir.actions.act_window">
-            <field name="name">Status Kapal</field>
-            <field name="res_model">dashboard.vessel</field>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="list_status_kapal_tree"/>
-        </record> -->
-
+        <!-- Tree Status Kapal Harian -->
         <record id="list_status_kapal_harian_tree" model="ir.ui.view">
             <field name="name">ins.harian.tree</field>
             <field name="model">ins.harian</field>
@@ -68,6 +14,7 @@
             </field>
         </record>
 
+         <!-- ACT Tree Status Kapal Harian -->
         <record id="act_list_status_kapal_harian_tree" model="ir.actions.act_window">
             <field name="name">Status Kapal Harian</field>
             <field name="res_model">ins.harian</field>
@@ -89,6 +36,7 @@
             </field>
         </record>
 
+         <!-- ACT PIE CHART Status Kapal Harian -->
         <record id="act_list_status_kapal_harian_pie" model="ir.actions.act_window">
             <field name="name">Status Kapal Harian</field>
             <field name="res_model">ins.harian</field>
@@ -99,6 +47,102 @@
             <field name="view_id" ref="list_status_kapal_harian_pie"/>
         </record>
 
+        <!-- Tree Daily Ops -->
+        <record id="list_daily_ops_tree" model="ir.ui.view">
+            <field name="name">daily.ops.tree</field>
+            <field name="model">daily.ops</field>
+            <field name="arch" type="xml">
+                <tree string="Daily Ops">
+                    <field name="name"/>
+                    <field name="vessel_id"/>
+                    <field name="report_date"/>
+                    <field name="status"/>
+                    <field name="captain_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ACT List Tree Daily Ops -->
+        <record id="act_list_daily_ops_tree" model="ir.actions.act_window">
+            <field name="name">Daily Ops</field>
+            <field name="res_model">daily.ops</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('stage','=', 'Approved')]
+            </field>
+            <field name="view_id" ref="list_daily_ops_tree"/>
+        </record>
+
+        <!-- PIE CHART Daily Ops-->
+        <record id="list_status_daily_ops_pie" model="ir.ui.view">
+            <field name="name">.daily.ops.pie</field>
+            <field name="model">daily.ops</field>
+            <field name="arch" type="xml">
+                <graph type="pie" string="Status Daily Ops">
+                    <field name="status"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- ACT PIE Daily Ops -->
+        <record id="act_list_status_daily_ops_pie" model="ir.actions.act_window">
+            <field name="name">Daily Ops</field>
+            <field name="res_model">daily.ops</field>
+            <field name="view_mode">graph</field>
+            <field name="domain">[('stage','=', 'Approved')]
+            </field>
+            <field name="view_id" ref="list_status_daily_ops_pie"/>
+        </record>
+
+
+        <!-- Tree Weekly -->
+        <record id="list_weekly_inspection_tree" model="ir.ui.view">
+            <field name="name">weekly.inspection.tree</field>
+            <field name="model">weekly.inspection</field>
+            <field name="arch" type="xml">
+                <tree string="Weekly Inspection">
+                    <field name="name"/>
+                    <field name="vessel_id"/>
+                    <field name="start_date"/>
+                    <field name="status"/>
+                    <field name="checked_by"/>
+                    <field name="start_time"/>
+                    <field name="finish_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ACT List Tree Weekly -->
+        <record id="act_list_weekly_inspection_tree" model="ir.actions.act_window">
+            <field name="name">Weekly Inspection</field>
+            <field name="res_model">weekly.inspection</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('stage','=', 'Approved'),('finish_time','&gt;', (context_today() -
+                datetime.timedelta(days=1)).strftime('%Y-%m-%d'))])]
+            </field>
+            <field name="view_id" ref="list_weekly_inspection_tree"/>
+        </record>
+
+        <!-- PIE CHART Weekly-->
+        <record id="list_status_weekly_inspection_pie" model="ir.ui.view">
+            <field name="name">weekly.inspection.pie</field>
+            <field name="model">weekly.inspection</field>
+            <field name="arch" type="xml">
+                <graph type="pie" string="Weekly Inspection">
+                    <field name="status"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- ACT PIE Weekly-->
+        <record id="act_list_status_weekly_inspection_pie" model="ir.actions.act_window">
+            <field name="name">Weekly Inspection</field>
+            <field name="res_model">weekly.inspection</field>
+            <field name="view_mode">graph</field>
+            <field name="domain">[('stage','=', 'Approved'),('finish_time','&gt;', (context_today() -
+                datetime.timedelta(days=1)).strftime('%Y-%m-%d'))])]
+            </field>
+            <field name="view_id" ref="list_status_weekly_inspection_pie"/>
+        </record>
 
         <record id="dashboard_form_view" model="ir.ui.view">
             <field name="name">Dashboard Form</field>
@@ -111,11 +155,25 @@
                             <action 
                                 string="Status Kapal Harian"
                                 name="%(inherit_digital_vessel.act_list_status_kapal_harian_pie)d"/>
+                            <action 
+                                string="Daily Ops"
+                                name="%(inherit_digital_vessel.act_list_status_daily_ops_pie)d"/>
+                                <action 
+                                string="Weekly Inspection"
+                                name="%(inherit_digital_vessel.act_list_status_weekly_inspection_pie)d"/>
                         </column>
                         <column>
                             <action 
                                 string="Status Kapal Harian"
                                 name="%(inherit_digital_vessel.act_list_status_kapal_harian_tree)d"/>
+
+                            <action 
+                                string="Daily Ops"
+                                name="%(inherit_digital_vessel.act_list_daily_ops_tree)d"/>
+
+                            <action 
+                                string="Weekly Inspection"
+                                name="%(inherit_digital_vessel.act_list_weekly_inspection_tree)d"/>
                         </column>
                     </board>
                 </form>
